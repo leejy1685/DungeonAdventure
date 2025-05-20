@@ -11,8 +11,7 @@ public class Interaction : MonoBehaviour
 
     public GameObject curInteractGameObject;// 현재 상호작용 게임오브젝트
     private IInteractable curInteractable;// 현재 상호작용 인터페이스
-
-
+    
     public GameObject prompt;
     private TextMeshProUGUI promptText;
     private Camera camera;
@@ -63,7 +62,7 @@ public class Interaction : MonoBehaviour
             curInteractable.OnInteract();
             curInteractGameObject = null;
             curInteractable = null;
-            promptText.gameObject.SetActive(false);
+            prompt.SetActive(false);
         }
     }
 }
