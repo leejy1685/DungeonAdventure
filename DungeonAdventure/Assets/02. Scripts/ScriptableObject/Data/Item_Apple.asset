@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e324e915db6afe74bb3cde17c4dfb6ec, type: 3}
+  m_Name: Item_Apple
+  m_EditorClassIdentifier: 
+  displayName: "\uC0AC\uACFC"
+  description: "\uCCB4\uB825\uC774 1000 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  type: 1
+  dropPrefab: {fileID: 2014975466595536891, guid: 43193ec30644aa84493ff0864da7b21d, type: 3}
+  consumable:
+    type: 0
+    duration: 0
+    value: 1000
