@@ -14,21 +14,24 @@ public class PlayerCondition : MonoBehaviour
         stamina.Add(stamina.passiveValue*Time.deltaTime);
     }
 
+    public void Die()
+    {
+        //게임 종료
+    }
+
+    #region Item
+    
     public void Heal(float amount)
     {
         health.Add(amount);
     }
-
-    public void Die()
-    {
-
-    }
-
-
+    
     public void TakePhysicalDamage(int damageAmount)
     {
         health.Subtract(damageAmount);
     }
+    
+    #endregion
 
     public bool UseStamina(float amount)
     {
