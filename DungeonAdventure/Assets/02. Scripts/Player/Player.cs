@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public PlayerController PlayerController;
+    public PlayerController Controller;
+    public PlayerCondition Condition;
     private void Awake()
     {
         CharacterManager.Instance.Player = this;
-        PlayerController = GetComponent<PlayerController>();
+        Controller = GetComponent<PlayerController>();
+        Condition = GetComponent<PlayerCondition>();
     }
     
     

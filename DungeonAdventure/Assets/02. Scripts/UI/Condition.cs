@@ -1,18 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Condition : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float curValue;
+    public float maxValue;
+    public float startValue;
+    public float passiveValue;
+    public Image uiBar;
+
+    private void Start()
     {
-        
+        curValue = startValue;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        uiBar.fillAmount = GetPercentage();
+    }
+
+    public void Add(float amount)
+    {
+        // 둘 중의 작은 값 (ex. maxValue보다 커지면 maxValue)
+        curValue = Mathf.Min(curValue + amount, maxValue);
+    }
+
+    public void Subtract(float amount)
+    {
+        // 둘 중의 큰 값 (ex. 0보다 작아지면 0)
+        curValue = Mathf.Max(curValue - amount, 0.0f);
+    }
+
+    public float GetPercentage()
+    {
+        return curValue / maxValue;
     }
 }

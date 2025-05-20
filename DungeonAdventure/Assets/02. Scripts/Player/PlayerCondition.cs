@@ -10,7 +10,8 @@ public class PlayerCondition : MonoBehaviour
     
     private void Update()
     {
-
+        health.Subtract(health.passiveValue*Time.deltaTime);
+        stamina.Add(stamina.passiveValue*Time.deltaTime);
     }
 
     public void Heal(float amount)
