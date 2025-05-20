@@ -19,18 +19,22 @@ public class ItemObject : MonoBehaviour,IInteractable
 
     public void OnInteract()
     {
-        Destroy(gameObject);
-
         if (data.type == ItemType.Consumable)
         {
             switch (data.consumable.type)
             {
                 case ConsumableType.Health:
+                    CharacterManager.Instance.Player.Condition.Heal(data.consumable.value);
                     break;
                 case ConsumableType.Speed :
+                    CharacterManager.Instance.Player.Controller.MoveSpeedUp(data.consumable.value,data.consumable.duration);
                     break;
             }
             
         }
+        Destroy(gameObject);
     }
+
+
+    
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        moveSpeed = defSpeed;   //초기 스피드
+
     }
     
     // 물리 연산
@@ -35,10 +39,11 @@ public class PlayerController : MonoBehaviour
     #region  Move
 
     [Header("Movement")]
-    public float moveSpeed;
+    [SerializeField] float defSpeed;
+    private float moveSpeed;
     private Vector2 curMovementInput; // 현재 입력 값
     public float jumpPower;
-    public LayerMask groundLayerMask; // 레이어 정보
+    [SerializeField] LayerMask groundLayerMask; // 레이어 정보
 
     private const string MOVE = "IsMove";
     private const string JUMP = "IsJump";
@@ -139,5 +144,26 @@ public class PlayerController : MonoBehaviour
     
     #endregion
     
+    #region Item
+
+    private Coroutine SpeedUpCoroutine;
+
+    public void MoveSpeedUp(float value,float duration)
+    {
+        if (SpeedUpCoroutine != null)
+        {
+            SpeedUpCoroutine = null;
+        }
+        SpeedUpCoroutine = StartCoroutine(SpeedUp( value, duration));
+    }
+    
+    IEnumerator SpeedUp(float value,float duration)
+    {
+        moveSpeed = defSpeed * value;
+        yield return new WaitForSeconds(duration);
+        moveSpeed = defSpeed;
+    }
+
+    #endregion
 
 }

@@ -7,11 +7,13 @@ public class Player : MonoBehaviour
 {
     public PlayerController Controller;
     public PlayerCondition Condition;
+    
     private void Awake()
     {
         CharacterManager.Instance.Player = this;
         Controller = GetComponent<PlayerController>();
         Condition = GetComponent<PlayerCondition>();
+        
     }
     
     
