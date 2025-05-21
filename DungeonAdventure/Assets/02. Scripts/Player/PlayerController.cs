@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         moveSpeed = defSpeed;   //초기 스피드
-        runSpeed = defSpeed * runnigPower;  //초기 달리기 속도
     }
 
     // 물리 연산
@@ -39,17 +38,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    #region  Move
-
+    #region Move
     [Header("Movement")]
-    [SerializeField] float defSpeed;    //기본 속도
-    private float runSpeed;             //달리는 속도
-    private float itemSpeed;            //아이템 먹었을 때 속도
-    private float moveSpeed;            //현재 속도
+    public float defSpeed;      //기본 속도
+    public float moveSpeed;     //현재 속도
     
     private Vector2 curMovementInput;   // 현재 입력 값
     public float jumpPower;             // 점프 파워
     [SerializeField] private LayerMask groundLayerMask; // 레이어 바닥
+    public int jumpCount = 1;       //바닥에 있을 때 초기화 되는 점프 수
+    private int jumpCounting = 0;   //실제로 사용가능한 점프 수
 
     [SerializeField] private float runnigPower; //달리기 파워
     [SerializeField] float runStemina;  //달리기 시 소모 스테미나
@@ -120,16 +118,26 @@ public class PlayerController : MonoBehaviour
     //캐릭터 점프 입력과 처리
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && IsGrounded())
+        if (context.phase == InputActionPhase.Started)
         {
+            IsGrounded();
+            Jump();
+        }
+    }
+
+    private void Jump()
+    {
+        if (jumpCounting > 0)
+        {
+            jumpCounting--;
             _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
-            
+
             _animator.SetTrigger(JUMP);
         }
     }
 
     //무한 점프를 막기위한 바닥에 있는지 확인하는 메서드
-    private bool IsGrounded()
+    private void IsGrounded()
     {
         Ray[] ray =
         {
@@ -143,11 +151,9 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(ray[i], 0.1f, groundLayerMask))
             {
-                return true;
+                jumpCounting = jumpCount;
             }
         }
-
-        return false;
     }
 
 
@@ -170,11 +176,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isRun)
         {
-            moveSpeed = runSpeed;
+            moveSpeed = defSpeed * runnigPower;
         }
         else
         {
-            moveSpeed = isSpeedUpItem ? itemSpeed : defSpeed;
+            moveSpeed = defSpeed;
         }
 
         return isRun;
@@ -190,11 +196,10 @@ public class PlayerController : MonoBehaviour
         }
             
     }
-
-
+    
 
     #endregion
-
+    
     #region Look
 
     [Header("Look")]
@@ -231,35 +236,4 @@ public class PlayerController : MonoBehaviour
     
     #endregion
     
-    #region Item
-
-    private bool isSpeedUpItem;
-    private Coroutine SpeedUpCoroutine;
-
-    public void MoveSpeedUp(float value,float duration)
-    {
-        if (SpeedUpCoroutine != null)
-        {
-            SpeedUpCoroutine = null;
-        }
-        SpeedUpCoroutine = StartCoroutine(SpeedUp( value, duration));
-    }
-    
-    IEnumerator SpeedUp(float value,float duration)
-    {
-        isSpeedUpItem = true;
-        itemSpeed = defSpeed * value;
-        runSpeed  = itemSpeed * runnigPower;
-        moveSpeed = useRun ? runSpeed : itemSpeed;
-        
-        yield return new WaitForSeconds(duration);
-
-        isSpeedUpItem = false;
-        itemSpeed = defSpeed;
-        runSpeed  = defSpeed * runnigPower;
-        moveSpeed = useRun ? runSpeed : defSpeed;
-    }
-
-    #endregion
-
 }

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public PlayerController Controller;
     public PlayerCondition Condition;
     public Interaction Interaction;
+    public ItemBuff ItemBuff;
     
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
         Controller = GetComponent<PlayerController>();
         Condition = GetComponent<PlayerCondition>();
         Interaction = GetComponent<Interaction>();
+        ItemBuff = GetComponent<ItemBuff>();
     }
     
     

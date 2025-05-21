@@ -27,7 +27,10 @@ public class ItemObject : MonoBehaviour,IInteractable
                     CharacterManager.Instance.Player.Condition.Heal(data.consumable.value);
                     break;
                 case ConsumableType.Speed :
-                    CharacterManager.Instance.Player.Controller.MoveSpeedUp(data.consumable.value,data.consumable.duration);
+                    CharacterManager.Instance.Player.ItemBuff.MoveSpeedUp(data.consumable.value,data.consumable.duration);
+                    break;
+                case ConsumableType.Jump :
+                    CharacterManager.Instance.Player.ItemBuff.UpgradeJump(data.consumable.value,data.consumable.duration);
                     break;
             }
             
