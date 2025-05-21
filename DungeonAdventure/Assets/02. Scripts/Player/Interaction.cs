@@ -6,7 +6,7 @@ public class Interaction : MonoBehaviour
 {
     [SerializeField]  float checkRate = 0.05f;// 상호작용 오브젝트 체크 시간
     private float lastCheckTime;// 마지막 상호작용 체크 시간
-    [SerializeField] float maxCheckDistance;// 최대 체크 거리
+    public float maxCheckDistance;// 최대 체크 거리
     [SerializeField] LayerMask layerMask;
 
     public GameObject curInteractGameObject;// 현재 상호작용 게임오브젝트

@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     public float jumpPower;             // 점프 파워
     [SerializeField] LayerMask groundLayerMask; // 레이어 정보
 
-    [SerializeField] private float runnigPower;
+    [SerializeField] private float runnigPower; //달리기 파워
     [SerializeField] float runStemina;  //달리기 시 소모 스테미나
     private bool useRun = false;        //달리는 중 판단
 
