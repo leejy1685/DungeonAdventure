@@ -7,12 +7,14 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody _rigidbody;
+    private CapsuleCollider _collider;
     private Animator _animator;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
+        _collider = GetComponent<CapsuleCollider>();
     }
 
     private void Start()
@@ -47,11 +49,13 @@ public class PlayerController : MonoBehaviour
     
     private Vector2 curMovementInput;   // 현재 입력 값
     public float jumpPower;             // 점프 파워
-    [SerializeField] LayerMask groundLayerMask; // 레이어 정보
+    [SerializeField] private LayerMask groundLayerMask; // 레이어 바닥
 
     [SerializeField] private float runnigPower; //달리기 파워
     [SerializeField] float runStemina;  //달리기 시 소모 스테미나
     private bool useRun = false;        //달리는 중 판단
+
+    [SerializeField] private LayerMask ladderLayer; //사다리 레이어
 
     private const string MOVE = "IsMove";
     private const string JUMP = "IsJump";
@@ -72,14 +76,46 @@ public class PlayerController : MonoBehaviour
     //캐릭터 이동
     private void Move()
     {
-        Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= moveSpeed;
-        dir.y = _rigidbody.velocity.y;
+        Vector3 dir = Vector3.zero;
+        if (IsLadder())
+        {   //사다리 타기
+            _rigidbody.useGravity = false;
+            dir = transform.up * curMovementInput.y + transform.right * curMovementInput.x;
+            dir *= moveSpeed;
+        }
+        else
+        {
+            _rigidbody.useGravity = true;
+            dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
+            dir *= moveSpeed;
+            dir.y = _rigidbody.velocity.y;
+        }
         
         _rigidbody.velocity = dir;
         
         _animator.SetBool(MOVE,curMovementInput.magnitude > 0.1f);
     }
+
+    private bool IsLadder()
+    {
+        Ray[] ray =
+        {
+            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * _collider.center.y), transform.forward),
+            new Ray(transform.position + (-transform.right * 0.2f) + (transform.up * _collider.center.y), transform.forward),
+            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * 0.01f), transform.forward),
+            new Ray(transform.position + (-transform.right * 0.2f) + (transform.up * 0.01f), transform.forward)
+        };
+
+        for (int i = 0; i < ray.Length; i++)
+        {
+            if (Physics.Raycast(ray[i], 0.3f, ladderLayer))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 
     //캐릭터 점프 입력과 처리
     public void OnJumpInput(InputAction.CallbackContext context)
