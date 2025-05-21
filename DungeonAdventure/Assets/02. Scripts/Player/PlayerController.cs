@@ -19,13 +19,14 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         moveSpeed = defSpeed;   //초기 스피드
-
+        runSpeed = defSpeed * runnigPower;  //초기 달리기 속도
     }
-    
+
     // 물리 연산
     private void FixedUpdate()
     {
         Move();
+        UseRunStemina();
     }
 
     private void LateUpdate()
@@ -39,11 +40,18 @@ public class PlayerController : MonoBehaviour
     #region  Move
 
     [Header("Movement")]
-    [SerializeField] float defSpeed;
-    private float moveSpeed;
-    private Vector2 curMovementInput; // 현재 입력 값
-    public float jumpPower;
+    [SerializeField] float defSpeed;    //기본 속도
+    private float runSpeed;             //달리는 속도
+    private float itemSpeed;            //아이템 먹었을 때 속도
+    private float moveSpeed;            //현재 속도
+    
+    private Vector2 curMovementInput;   // 현재 입력 값
+    public float jumpPower;             // 점프 파워
     [SerializeField] LayerMask groundLayerMask; // 레이어 정보
+
+    [SerializeField] private float runnigPower;
+    [SerializeField] float runStemina;  //달리기 시 소모 스테미나
+    private bool useRun = false;        //달리는 중 판단
 
     private const string MOVE = "IsMove";
     private const string JUMP = "IsJump";
@@ -105,11 +113,54 @@ public class PlayerController : MonoBehaviour
 
         return false;
     }
-    
+
+
+    //달리기 입력 처리
+    public void OnRunInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            useRun = Running(true);
+        }
+        else if(context.phase == InputActionPhase.Canceled)
+        {
+            useRun = Running(false);
+        }
+        
+    }
+
+    //달리기
+    private bool Running(bool isRun)
+    {
+        if (isRun)
+        {
+            moveSpeed = runSpeed;
+        }
+        else
+        {
+            moveSpeed = isSpeedUpItem ? itemSpeed : defSpeed;
+        }
+
+        return isRun;
+    }
+
+    //달리기 스태미나 소모
+    private void UseRunStemina()
+    {
+        if (useRun)
+        {
+            if(!CharacterManager.Instance.Player.Condition.UseStamina(runStemina * Time.deltaTime))
+                useRun = Running(false);
+        }
+            
+    }
+
+
+
     #endregion
-    
+
     #region Look
-    
+
     [Header("Look")]
     public Transform cameraContainer;
     public float minXLook; // 최소 시야각
@@ -146,6 +197,7 @@ public class PlayerController : MonoBehaviour
     
     #region Item
 
+    private bool isSpeedUpItem;
     private Coroutine SpeedUpCoroutine;
 
     public void MoveSpeedUp(float value,float duration)
@@ -159,9 +211,17 @@ public class PlayerController : MonoBehaviour
     
     IEnumerator SpeedUp(float value,float duration)
     {
-        moveSpeed = defSpeed * value;
+        isSpeedUpItem = true;
+        itemSpeed = defSpeed * value;
+        runSpeed  = itemSpeed * runnigPower;
+        moveSpeed = useRun ? runSpeed : itemSpeed;
+        
         yield return new WaitForSeconds(duration);
-        moveSpeed = defSpeed;
+
+        isSpeedUpItem = false;
+        itemSpeed = defSpeed;
+        runSpeed  = defSpeed * runnigPower;
+        moveSpeed = useRun ? runSpeed : defSpeed;
     }
 
     #endregion

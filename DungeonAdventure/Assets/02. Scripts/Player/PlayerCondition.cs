@@ -18,21 +18,7 @@ public class PlayerCondition : MonoBehaviour
     {
         //게임 종료
     }
-
-    #region Item
     
-    public void Heal(float amount)
-    {
-        health.Add(amount);
-    }
-    
-    public void TakePhysicalDamage(int damageAmount)
-    {
-        health.Subtract(damageAmount);
-    }
-    
-    #endregion
-
     public bool UseStamina(float amount)
     {
         if (stamina.curValue - amount < 0)
@@ -42,4 +28,21 @@ public class PlayerCondition : MonoBehaviour
         stamina.Subtract(amount);
         return true;
     }
+        
+    
+    
+    #region Item
+    
+    public void Heal(float amount)
+    { 
+        health.Add(amount);
+    }
+        
+    public void TakePhysicalDamage(int damageAmount) 
+    { 
+        health.Subtract(damageAmount);
+    }
+        
+    #endregion
+    
 }
