@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e324e915db6afe74bb3cde17c4dfb6ec, type: 3}
+  m_Name: Item_Dagger
+  m_EditorClassIdentifier: 
+  displayName: "\uB2E8\uAC80"
+  description: "\uC774\uB3D9\uC18D\uB3C4\uAC00 +2 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  type: 0
+  dropPrefab: {fileID: 8418489804914471053, guid: 37672431cd704e441b1bde0abe76348c, type: 3}
+  consumable:
+    type: 0
+    duration: 0
+    value: 0
+  equipPrefab: {fileID: 166248666093806646, guid: 098c469f37cf390438b98a63d56fa424, type: 3}

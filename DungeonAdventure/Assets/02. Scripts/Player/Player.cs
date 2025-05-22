@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public PlayerCondition Condition;
     public Interaction Interaction;
     public ItemBuff ItemBuff;
+    public Equipment Equipment;
     
     private void Awake()
     {
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
         Condition = GetComponent<PlayerCondition>();
         Interaction = GetComponent<Interaction>();
         ItemBuff = GetComponent<ItemBuff>();
+        Equipment = GetComponent<Equipment>();
     }
     
     

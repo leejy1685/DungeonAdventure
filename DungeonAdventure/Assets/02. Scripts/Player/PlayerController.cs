@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-        UseRunStemina();
     }
 
     private void LateUpdate()
@@ -41,7 +40,7 @@ public class PlayerController : MonoBehaviour
     #region Move
     [Header("Movement")]
     public float defSpeed;      //기본 속도
-    public float moveSpeed;     //현재 속도
+    private float moveSpeed;     //현재 속도
     
     private Vector2 curMovementInput;   // 현재 입력 값
     public float jumpPower;             // 점프 파워
@@ -50,8 +49,8 @@ public class PlayerController : MonoBehaviour
     private int jumpCounting = 0;   //실제로 사용가능한 점프 수
 
     [SerializeField] private float runnigPower; //달리기 파워
-    [SerializeField] float runStemina;  //달리기 시 소모 스테미나
-    private bool useRun = false;        //달리는 중 판단
+    public float runStemina;  //달리기 시 소모 스테미나
+    public bool useRun = false;        //달리는 중 판단
 
     [SerializeField] private LayerMask ladderLayer; //사다리 레이어
 
@@ -166,35 +165,30 @@ public class PlayerController : MonoBehaviour
         }
         else if(context.phase == InputActionPhase.Canceled)
         {
-            useRun = Running(false);
+            if(useRun)
+                useRun = Running(false);
         }
         
     }
 
     //달리기
-    private bool Running(bool isRun)
+    public bool Running(bool isRun)
     {
         if (isRun)
         {
-            moveSpeed = defSpeed * runnigPower;
+            moveSpeed *= runnigPower;
         }
         else
         {
-            moveSpeed = defSpeed;
+            moveSpeed /= runnigPower;
         }
 
         return isRun;
     }
 
-    //달리기 스태미나 소모
-    private void UseRunStemina()
+    public void UpdateMoveSpeed(float statUp = 1)
     {
-        if (useRun)
-        {
-            if(!CharacterManager.Instance.Player.Condition.UseStamina(runStemina * Time.deltaTime))
-                useRun = Running(false);
-        }
-            
+        moveSpeed = defSpeed * statUp;
     }
     
 

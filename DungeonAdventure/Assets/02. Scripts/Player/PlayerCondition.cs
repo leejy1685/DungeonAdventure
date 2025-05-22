@@ -1,17 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCondition : MonoBehaviour
 {
+    private PlayerController controller;
     public UICondition uiCondition;
     Condition health { get { return uiCondition.health; } }
     Condition stamina { get { return uiCondition.stamina; } }
-    
+
+
+    private void Awake()
+    {
+        controller = CharacterManager.Instance.Player.Controller;
+    }
+
     private void Update()
     {
         health.Subtract(health.passiveValue*Time.deltaTime);
         stamina.Add(stamina.passiveValue*Time.deltaTime);
+
+        if (controller.useRun && !UseStamina(controller.runStemina*Time.deltaTime))
+        {
+            controller.useRun =  controller.Running(false);
+        }
     }
 
     public void Die()

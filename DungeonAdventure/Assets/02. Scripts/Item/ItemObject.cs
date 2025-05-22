@@ -26,14 +26,20 @@ public class ItemObject : MonoBehaviour,IInteractable
                 case ConsumableType.Health:
                     CharacterManager.Instance.Player.Condition.Heal(data.consumable.value);
                     break;
-                case ConsumableType.Speed :
-                    CharacterManager.Instance.Player.ItemBuff.MoveSpeedUp(data.consumable.value,data.consumable.duration);
+                case ConsumableType.Speed:
+                    CharacterManager.Instance.Player.ItemBuff.MoveSpeedUp(data.consumable.value,
+                        data.consumable.duration);
                     break;
-                case ConsumableType.Jump :
-                    CharacterManager.Instance.Player.ItemBuff.UpgradeJump(data.consumable.value,data.consumable.duration);
+                case ConsumableType.Jump:
+                    CharacterManager.Instance.Player.ItemBuff.UpgradeJump(data.consumable.value,
+                        data.consumable.duration);
                     break;
             }
-            
+        }
+
+        if (data.type == ItemType.Equipable)
+        {
+            CharacterManager.Instance.Player.Equipment.EquipNew(data);
         }
         Destroy(gameObject);
     }

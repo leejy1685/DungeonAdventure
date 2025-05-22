@@ -29,13 +29,19 @@ public class ItemBuff : MonoBehaviour
     
     IEnumerator SpeedUp(float value,float duration)
     {
-        controller.defSpeed *= value;
-        controller.moveSpeed = controller.defSpeed;
+        controller.UpdateMoveSpeed(value);
         
         yield return new WaitForSeconds(duration);
-        
-        controller.defSpeed /= value;
-        controller.moveSpeed = controller.defSpeed;
+
+        if (controller.useRun)
+        {
+            controller.UpdateMoveSpeed();
+            controller.Running(true);
+        }
+        else
+        {
+            controller.UpdateMoveSpeed();
+        }
     }
 
     
