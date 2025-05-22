@@ -60,6 +60,9 @@ public class Equipment : MonoBehaviour
     // 카메라 1인칭, 3인칭에 따라 무기 위치 변환
     public void ChangePosition(bool isFirstPerson)
     {
+        if (curEquip == null)
+            return;
+            
         if (isFirstPerson)
         {   //1인칭 상태 일 때
             curEquip.transform.parent = firstPersonEquipPosition;
