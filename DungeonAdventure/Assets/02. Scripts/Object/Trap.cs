@@ -27,15 +27,17 @@ public class Trap : MonoBehaviour
 
     private void CheckTrap()
     {
+        //배치에 어려움이 있을거 같아 확인용
         Debug.DrawRay(transform.position,transform.forward * checkDistance, Color.black );
         
+        //시간마다 체크
         if (Time.time - lastCheckTime > checkRate)
         {
             lastCheckTime = Time.time;
 
             if (Physics.Raycast(ray, checkDistance, targetLayer))
             {
-                trapIndicator.Flash();
+                GameManager.Instance.uiManager.StartTrap();
             }
             
         }

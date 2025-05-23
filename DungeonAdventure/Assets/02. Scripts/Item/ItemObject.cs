@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,7 +18,6 @@ public class ItemObject : MonoBehaviour,IInteractable
     public Transform canvas;
     public TextMeshProUGUI text;
 
-
     public void SetActivePrompt(bool onOff)
     {
         if (canvas == null)
@@ -33,10 +33,10 @@ public class ItemObject : MonoBehaviour,IInteractable
                 break;
         }
         
-        canvas.gameObject.SetActive(onOff);
         canvas.LookAt(CharacterManager.Instance.Player.Controller.cameraContainer);
-        
+        canvas.gameObject.SetActive(onOff);
     }
+    
     public string GetInteractPrompt()
     {
         string str = $"{data.displayName}\n{data.description}";

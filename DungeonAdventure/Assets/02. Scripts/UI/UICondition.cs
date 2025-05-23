@@ -20,6 +20,11 @@ public class UICondition : MonoBehaviour
     {
         CharacterManager.Instance.Player.Condition.uiCondition = this;
     }
-    
+
+    public void SetConditon()
+    {
+        health.SetValue();
+        stamina.SetValue();
+    }
     
 }

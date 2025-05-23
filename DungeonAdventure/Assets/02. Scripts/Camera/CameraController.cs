@@ -28,6 +28,14 @@ public class CameraController : MonoBehaviour
         cameraDistance = FirstPersonCamera.transform.position.z - ThirdPersonCamera.transform.position.z;
         isFirstPerson = true;
     }
+
+    public void SetCamera()
+    {
+        if (!isFirstPerson)
+        {
+            ChangeCamera();
+        }
+    }
     
     //tab 키 입력시 사용
     public void OnCameraChange(InputAction.CallbackContext context)

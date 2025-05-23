@@ -25,11 +25,14 @@ public class PlayerCondition : MonoBehaviour
         {
             controller.useRun =  controller.Running(false);
         }
+
+        Die();
     }
 
     public void Die()
     {
-        //게임 종료
+        if(GameManager.Instance.isPlaying && health.curValue<=0)
+            GameManager.Instance.GameOver();
     }
     
     public bool UseStamina(float amount)
@@ -50,11 +53,7 @@ public class PlayerCondition : MonoBehaviour
     { 
         health.Add(amount);
     }
-        
-    public void TakePhysicalDamage(int damageAmount) 
-    { 
-        health.Subtract(damageAmount);
-    }
+    
         
     #endregion
     

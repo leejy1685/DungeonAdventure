@@ -15,13 +15,10 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _collider = GetComponent<CapsuleCollider>();
-    }
-
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
+        
         moveSpeed = defSpeed;   //초기 스피드
     }
+    
 
     // 물리 연산
     private void FixedUpdate()
