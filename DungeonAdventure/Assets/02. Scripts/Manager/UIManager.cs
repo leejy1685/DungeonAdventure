@@ -13,28 +13,38 @@ public enum UIState
 
 public class UIManager : MonoBehaviour
 {
+    //구현된 UI
     private StartUI startUI;
     private TutorialUI tutorialUI;
     private GameUI gameUI;
     private GameOverUI gameOverUI;
     
     private UIState currentState;// 현재 UI 상태
+    
+    //함정 UI
+    public TrapIndicator TrapIndicator;
 
+    
     private void Awake()
     {
+        //UI 컴포넌트 가져오기
         startUI = GetComponentInChildren<StartUI>(true);
         tutorialUI = GetComponentInChildren<TutorialUI>(true);
         gameUI = GetComponentInChildren<GameUI>(true);
         gameOverUI = GetComponentInChildren<GameOverUI>(true);
 
+        //UI 셋팅하기
         startUI.Init(this);
         tutorialUI.Init(this);
         gameUI.Init(this);
         gameOverUI.Init(this);
 
+        
+        //시작 UI
         ChangeState(UIState.Start);
     }
 
+    //UI 변경
     public void ChangeState(UIState state)
     {
         currentState = state;
@@ -45,14 +55,10 @@ public class UIManager : MonoBehaviour
         gameOverUI.SetActive(currentState);
     }
 
+    //아이템 정보 UI 셋팅
     public void SetPromptText(bool onOff, IInteractable item = null)
     {
         gameUI.SetPromptText(onOff, item);
-    }
-
-    public void StartTrap()
-    {
-        gameUI.StartTrap();
     }
     
     

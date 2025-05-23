@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour
         isFirstPerson = true;
     }
 
+    //게임 재시작 시 1인칭으로 전환
     public void SetCamera()
     {
         if (!isFirstPerson)

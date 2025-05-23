@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//기초가 되는 UI
 public abstract class BaseUI : MonoBehaviour
 {
     protected UIManager uiManager;

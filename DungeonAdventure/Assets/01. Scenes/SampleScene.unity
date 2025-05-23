@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb67cd26a95cba0428a08115230fad70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curValue: 0
+  curValue: 1
   maxValue: 1000
   startValue: 1000
   passiveValue: 1
@@ -4362,11 +4362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c8999e2798d364bbbbd87490aa3249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
-  Condition: {fileID: 0}
-  Interaction: {fileID: 0}
-  ItemBuff: {fileID: 0}
-  Equipment: {fileID: 0}
 --- !u!114 &890962631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6176,7 +6171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d550a6b57975da4499d67eebd5a81613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashSpeed: 2
+  flashTime: 2
 --- !u!114 &1345967563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6896,6 +6891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9148a16c7370f4598c0ee5452155d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TrapIndicator: {fileID: 1345967562}
 --- !u!1 &1527620254
 GameObject:
   m_ObjectHideFlags: 0

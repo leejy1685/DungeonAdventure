@@ -22,6 +22,7 @@ public class Interaction : MonoBehaviour
     
     void Update()
     {
+        //라이더에서 비용이 높다고 하는데, SetActivePrompt()의 비용 낮추는 방법을 모르겠음.
         CheckInteractalbe();
     }
 

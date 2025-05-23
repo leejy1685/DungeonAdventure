@@ -6,10 +6,10 @@ using UnityEngine;
 //장착 장비를 관리하는 클래스
 public class Equipment : MonoBehaviour
 {
-    public Equip curEquip;
-    public Transform firstPersonEquipPosition;
-    public Transform thirdPersonEquipPosition;
-    public Transform dropPosition;
+    public Equip curEquip;  //현재 장비
+    public Transform firstPersonEquipPosition;  //1인칭 일 때 장비의 위치
+    public Transform thirdPersonEquipPosition;  //3인칭 일 때 장비의 위치
+    public Transform dropPosition;  //아이템 교체시 아이템 버리는 위치
     
     private PlayerController controller;
     private CameraController camera;
@@ -45,7 +45,7 @@ public class Equipment : MonoBehaviour
             curEquip.UnEquipEffect();
             controller.UpdateMoveSpeed();
 
-            ThrowItem(curEquip.itemData);
+            ThrowItem(curEquip.ItemData);
             Destroy(curEquip.gameObject);
             curEquip = null;
         }

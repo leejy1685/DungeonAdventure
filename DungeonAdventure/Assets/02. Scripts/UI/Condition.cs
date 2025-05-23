@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//컨디션을 다루는 클래스
 public class Condition : MonoBehaviour
 {
-    public float curValue;
-    public float maxValue;
-    public float startValue;
-    public float passiveValue;
-    public Image uiBar;
+    public float curValue;  //현재 값
+    public float maxValue;  //최대 값
+    public float startValue;    //시작 값
+    public float passiveValue;  //패시브 값
+    public Image uiBar; //UI에 표시
 
+    //시작 값 셋팅
     public void SetValue()
     {
         curValue = startValue;
     }
 
+    //상시로 UI에 표시
     private void Update()
     {
         uiBar.fillAmount = GetPercentage();
