@@ -15,7 +15,7 @@ public class Trap : MonoBehaviour
     
     private void Awake()
     {
-        trapIndicator = GameObject.Find("TrapIndicator").GetComponent<TrapIndicator>();
+        trapIndicator = FindAnyObjectByType<TrapIndicator>();
         ray = new Ray(transform.position, transform.forward);
         targetLayer = LayerMask.GetMask("Player");
     }

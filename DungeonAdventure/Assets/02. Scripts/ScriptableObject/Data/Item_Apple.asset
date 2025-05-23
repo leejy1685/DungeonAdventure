@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Item_Apple
   m_EditorClassIdentifier: 
   displayName: "\uC0AC\uACFC"
-  description: "\uCCB4\uB825\uC774 1000 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  description: "\uCCB4\uB825\uC774 100 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   type: 1
   dropPrefab: {fileID: 2014975466595536891, guid: 43193ec30644aa84493ff0864da7b21d, type: 3}
   consumable:
     type: 0
     duration: 0
-    value: 1000
+    value: 100
+  equipPrefab: {fileID: 0}

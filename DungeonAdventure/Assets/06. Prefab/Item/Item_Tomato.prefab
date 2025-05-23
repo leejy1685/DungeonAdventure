@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 4490275751443421517}
   - component: {fileID: 13069889948869746}
   - component: {fileID: 6385078036735815498}
+  - component: {fileID: 4633074299161880529}
   m_Layer: 7
   m_Name: Item_Tomato
   m_TagString: Untagged
@@ -173,6 +174,33 @@ MonoBehaviour:
   data: {fileID: 0}
   canvas: {fileID: 8421131848841258720}
   text: {fileID: 2529496649802163556}
+--- !u!54 &4633074299161880529
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945497989211339001}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4689471444160355995
 GameObject:
   m_ObjectHideFlags: 0
