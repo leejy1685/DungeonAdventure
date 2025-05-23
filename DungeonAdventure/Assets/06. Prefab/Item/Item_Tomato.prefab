@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 006b5cfe1843aed4b81d895a8b85dd0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: 457a7cce6d27faf49ab04601e8140c39, type: 2}
   canvas: {fileID: 8421131848841258720}
   text: {fileID: 2529496649802163556}
 --- !u!54 &4633074299161880529
