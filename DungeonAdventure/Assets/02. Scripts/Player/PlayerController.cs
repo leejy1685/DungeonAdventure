@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
         _collider = GetComponent<CapsuleCollider>();
         
         moveSpeed = defSpeed;   //초기 스피드
+        canLook = false; //화면 돌리기 막기
     }
     
 
@@ -200,9 +201,8 @@ public class PlayerController : MonoBehaviour
     private float camCurXRot = 0;
     public float lookSensitivity;// 카메라 민감도
     private Vector2 mouseDelta;// 마우스 변화값
-    
-    [HideInInspector]
-    public bool canLook = true;
+
+    [HideInInspector] public bool canLook;
     
     // 입력값 처리
     public void OnLookInput(InputAction.CallbackContext context)

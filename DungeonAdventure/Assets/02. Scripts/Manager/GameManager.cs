@@ -49,8 +49,9 @@ public class GameManager : MonoBehaviour
         isPlaying = true;
         Time.timeScale = 1;
         uiManager.ChangeState(UIState.Game);   //UI 변경
+        CharacterManager.Instance.Player.Controller.canLook = true; //시점 변환 가능
         CharacterManager.Instance.Player.Condition.uiCondition.SetConditon();   //시작 컨디션
-        //CharacterManager.Instance.Player.transform.position = startPosition.position;   //시작 포지션
+        CharacterManager.Instance.Player.transform.position = startPosition.position;   //시작 포지션
         cameraController.SetCamera();   //카메라 셋팅
 
         Cursor.lockState = CursorLockMode.Locked;   //화면에 마우스 고정
