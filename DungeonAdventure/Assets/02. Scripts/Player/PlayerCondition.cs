@@ -24,6 +24,7 @@ public class PlayerCondition : MonoBehaviour
         if (!GameManager.Instance.isPlaying)
             return;
         
+        //체력 소모를 코루틴으로
         health.Subtract(health.passiveValue*Time.deltaTime);    //자동으로 체력 달기 시간제한
         stamina.Add(stamina.passiveValue*Time.deltaTime);       //자동으로 스테미나 회복
 
@@ -38,10 +39,11 @@ public class PlayerCondition : MonoBehaviour
         //비용이 높은 이유는 알고 있으나 해결 방법을 모르겠음.
         Die();
     }
+    
 
     public void Die()
     {
-        if(health.curValue<=0)
+        if (health.curValue <= 0)
             GameManager.Instance.GameOver();
     }
     

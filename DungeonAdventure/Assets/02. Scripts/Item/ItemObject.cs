@@ -19,6 +19,8 @@ public class ItemObject : MonoBehaviour,IInteractable
     public Transform canvas;
     public TextMeshProUGUI text;
 
+    
+    // 이 병신같은 코드 없애고 UI로 기능 할당하기
     public void SetActivePrompt(bool onOff)
     {
         //아이템 사용 시 오류 발생 방지
