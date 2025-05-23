@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Start UI 클래스
 public class StartUI : BaseUI
 {
     [SerializeField]private Button startButton; 
@@ -23,16 +24,19 @@ public class StartUI : BaseUI
         return UIState.Start;
     }
 
+    //게임 시작 버튼
     public void OnClickStartButton()
     {
         GameManager.Instance.GameStart();
     }
     
+    //튜토리얼 창으로 전환
     public void OnClickTutorialButton()
     {
         uiManager.ChangeState(UIState.Tutorial);
     }
 
+    //게임 종료
     public void OnClickExitButton()
     {
         Application.Quit();

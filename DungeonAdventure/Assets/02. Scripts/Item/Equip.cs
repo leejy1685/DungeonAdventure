@@ -17,15 +17,19 @@ public class Equipable
 
 public class Equip : MonoBehaviour
 {
-    public ItemData itemData;
-    public Equipable[] equipables;
+    [SerializeField]private ItemData itemData;
+    public ItemData ItemData
+    {
+        get { return itemData; }
+    }
+    [SerializeField]private Equipable[] equipables;
     
-    
+    //아이템 장착 효과
     public void EquipEffect()
     {
         foreach (Equipable equipable in equipables)
         {
-            switch (equipable.equipType)
+            switch (equipable.equipType)    //장착 타입에 따른 효과 업
             {
                 case EquipType.Speed:
                     CharacterManager.Instance.Player.Controller.defSpeed += equipable.value;
@@ -38,6 +42,7 @@ public class Equip : MonoBehaviour
         }
     }
     
+    //장비 해제 시 
     public void UnEquipEffect()
     {
         foreach (Equipable equipable in equipables)

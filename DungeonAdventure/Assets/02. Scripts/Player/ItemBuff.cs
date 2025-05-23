@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//유저의 아이템 버프 효과를 관리하는 클래스
 public class ItemBuff : MonoBehaviour
 {
     private PlayerController controller;
@@ -18,6 +19,7 @@ public class ItemBuff : MonoBehaviour
     [Header("SpeedUp")]
     private Coroutine SpeedUpCoroutine;
 
+    //속도 증가 메서드
     public void MoveSpeedUp(float value,float duration)
     {
         if (SpeedUpCoroutine != null)
@@ -27,13 +29,14 @@ public class ItemBuff : MonoBehaviour
         SpeedUpCoroutine = StartCoroutine(SpeedUp( value, duration));
     }
     
+    //속도 증가 코루틴
     IEnumerator SpeedUp(float value,float duration)
     {
         controller.UpdateMoveSpeed(value);
         
         yield return new WaitForSeconds(duration);
 
-        if (controller.useRun)
+        if (controller.useRun)  //달리기 중 일 때
         {
             controller.UpdateMoveSpeed();
             controller.Running(true);
@@ -49,6 +52,7 @@ public class ItemBuff : MonoBehaviour
     [Header("DoubleJump")] 
     private Coroutine DoubleJumpCoroutine;
     
+    //점프 횟수 증가 메서드
     public void UpgradeJump(float value,float duration)
     {
         if (DoubleJumpCoroutine != null)
@@ -58,6 +62,7 @@ public class ItemBuff : MonoBehaviour
         DoubleJumpCoroutine = StartCoroutine(DoubleJump( value, duration));
     }
 
+    //점프 횟수 증가 코루틴
     IEnumerator DoubleJump(float value, float duration)
     {
         controller.jumpCount = (int)value;

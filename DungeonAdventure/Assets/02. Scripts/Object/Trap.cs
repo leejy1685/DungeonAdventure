@@ -25,6 +25,7 @@ public class Trap : MonoBehaviour
         CheckTrap();
     }
 
+    //함정에 걸렸는지 확인하는 메서드
     private void CheckTrap()
     {
         //배치에 어려움이 있을거 같아 확인용

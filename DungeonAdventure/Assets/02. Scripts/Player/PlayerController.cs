@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//캐릭터 조작을 담당하는 메서드
 public class PlayerController : MonoBehaviour
 {
+    //캐릭터 조작에 필요한 정보
     private Rigidbody _rigidbody;
     private CapsuleCollider _collider;
     private Animator _animator;
@@ -24,14 +26,14 @@ public class PlayerController : MonoBehaviour
     // 물리 연산
     private void FixedUpdate()
     {
-        Move();
+        Move(); //이동
     }
 
     private void LateUpdate()
     {
         if (canLook)
         {
-            CameraLook();
+            CameraLook();   //카메라 방향 전환
         }
     }
 
@@ -79,11 +81,11 @@ public class PlayerController : MonoBehaviour
             dir *= moveSpeed;
         }
         else
-        {
+        {   //일반적인 걷기
             _rigidbody.useGravity = true;
             dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
             dir *= moveSpeed;
-            dir.y = _rigidbody.velocity.y;
+            dir.y = _rigidbody.velocity.y;  //중력으로 인한 속도 유지
         }
         
         _rigidbody.velocity = dir;
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool(MOVE,curMovementInput.magnitude > 0.1f);
     }
 
+    //전방에 사다리가 존재하는지 판단
     private bool IsLadder()
     {
         Ray[] ray =
@@ -122,6 +125,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //점프 메서드
     private void Jump()
     {
         if (jumpCounting > 0)
@@ -148,7 +152,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(ray[i], 0.1f, groundLayerMask))
             {
-                jumpCounting = jumpCount;
+                jumpCounting = jumpCount;   //땅에 닿아 있으면 점프 가능 횟수를 부여
             }
         }
     }
@@ -184,6 +188,7 @@ public class PlayerController : MonoBehaviour
         return isRun;
     }
 
+    //이동 속도 변경 메서드
     public void UpdateMoveSpeed(float statUp = 1)
     {
         moveSpeed = defSpeed * statUp;
@@ -213,15 +218,12 @@ public class PlayerController : MonoBehaviour
     void CameraLook()
     {
         // 마우스 움직임의 변화량(mouseDelta)중 y(위 아래)값에 민감도를 곱한다.
-        // 카메라가 위 아래로 회전하려면 rotation의 x 값에 넣어준다. -> 실습으로 확인
         camCurXRot += mouseDelta.y * lookSensitivity;
         camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
         cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
 
         // 마우스 움직임의 변화량(mouseDelta)중 x(좌우)값에 민감도를 곱한다.
-        // 카메라가 좌우로 회전하려면 rotation의 y 값에 넣어준다. -> 실습으로 확인
         // 좌우 회전은 플레이어(transform)를 회전시켜준다.
-        // Why? 회전시킨 방향을 기준으로 앞뒤좌우 움직여야하니까.
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
     }
     

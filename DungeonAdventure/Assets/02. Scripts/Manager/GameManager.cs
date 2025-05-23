@@ -18,13 +18,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //UIManager
     public UIManager uiManager;
 
+    //게임 초기화 시 위치 정보와 카메라 컨트롤러
     private Transform startPosition;
     private CameraController cameraController;
 
+    //게임 플레이 판단 여부
     public bool isPlaying;
-    
     
     private void Awake()
     {
@@ -38,12 +40,14 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        //필요한 정보 가져오기
         startPosition = GameObject.Find("StartPosition").transform;
         cameraController = GameObject.Find("CameraController").GetComponent<CameraController>();
         
         isPlaying = false;
     }
 
+    //게임 시작 또는 재시작
     public void GameStart()
     {
         isPlaying = true;
@@ -57,6 +61,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;   //화면에 마우스 고정
     }
 
+    //게임 오버
     public void GameOver()
     {
         isPlaying = false;
