@@ -50,10 +50,9 @@ public class UIManager : MonoBehaviour
         gameUI.SetPromptText(onOff, item);
     }
 
-    public void StartTrap()
+    public TrapIndicator getTrapIndicator()
     {
-        gameUI.StartTrap();
+        return gameUI.trapIndicator;
     }
-    
     
 }

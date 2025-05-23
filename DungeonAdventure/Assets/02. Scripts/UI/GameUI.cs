@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameUI : BaseUI
 {
-    private TrapIndicator trapIndicator;   //레이저 함정 걸렸을 때 화면
+    public TrapIndicator trapIndicator;   //레이저 함정 걸렸을 때 화면
     
     [SerializeField]private GameObject prompt;
     private TextMeshProUGUI promptText;     //아이템 설명
@@ -23,11 +23,6 @@ public class GameUI : BaseUI
     protected override UIState GetUIState()
     {
         return UIState.Game;
-    }
-
-    public void StartTrap()
-    {
-        trapIndicator.Flash();
     }
     
     public void SetPromptText(bool onOff, IInteractable curInteractable = null)

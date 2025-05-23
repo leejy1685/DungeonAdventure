@@ -13,9 +13,9 @@ public class Trap : MonoBehaviour
     private float lastCheckTime;
     [SerializeField] private float checkRate;
     
-    private void Awake()
+    private void Start()
     {
-        trapIndicator = FindAnyObjectByType<TrapIndicator>();
+        trapIndicator = GameManager.Instance.uiManager.getTrapIndicator();
         ray = new Ray(transform.position, transform.forward);
         targetLayer = LayerMask.GetMask("Player");
     }
@@ -37,7 +37,7 @@ public class Trap : MonoBehaviour
 
             if (Physics.Raycast(ray, checkDistance, targetLayer))
             {
-                GameManager.Instance.uiManager.StartTrap();
+                trapIndicator.Flash();
             }
             
         }
