@@ -21,10 +21,6 @@ public class UIManager : MonoBehaviour
     
     private UIState currentState;// 현재 UI 상태
     
-    //함정 UI
-    public TrapIndicator TrapIndicator;
-
-    
     private void Awake()
     {
         //UI 컴포넌트 가져오기

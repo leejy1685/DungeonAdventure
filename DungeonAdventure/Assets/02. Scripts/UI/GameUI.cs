@@ -10,18 +10,20 @@ public class GameUI : BaseUI
     public TrapIndicator trapIndicator;   //레이저 함정 걸렸을 때 화면
     
     [SerializeField]private GameObject prompt;
-    private TextMeshProUGUI promptText;     //아이템 설명
     
-    //Condition을 먼저 구현한 이유로 GameUI에 욺기기에는 늦었다고 판단
-    //Condition이 플레이어와 연동되어 있는 이유로 기능 옮기기 힘들다고 생각
+    private TextMeshProUGUI promptText;     //아이템 설명
+    private TextMeshProUGUI interactionText;//상호작용 효과 설명
+    
 
     public override void Init(UIManager uiManager)
     {
         base.Init(uiManager);
 
         trapIndicator = GetComponentInChildren<TrapIndicator>();
-
-        promptText = GetComponentInChildren<TextMeshProUGUI>();
+        
+        promptText = prompt.GetComponentsInChildren<TextMeshProUGUI>()[0];
+        interactionText = prompt.GetComponentsInChildren<TextMeshProUGUI>()[1];
+        
         prompt.SetActive(false);
     }
     protected override UIState GetUIState()
@@ -33,6 +35,7 @@ public class GameUI : BaseUI
     public void SetPromptText(bool onOff, IInteractable curInteractable = null)
     {
         prompt.SetActive(onOff);
-        promptText.text = curInteractable?.GetInteractPrompt();
+        promptText.text = curInteractable?.GetItemPrompt();
+        interactionText.text = curInteractable?.GetInteractPrompt();
     }
 }

@@ -59,6 +59,9 @@ public class GameManager : MonoBehaviour
         cameraController.SetCamera();   //카메라 셋팅
 
         Cursor.lockState = CursorLockMode.Locked;   //화면에 마우스 고정
+
+        CharacterManager.Instance.Player.Condition.StartPlayerCondition();  //체력 소모 시작
+
     }
 
     //게임 오버

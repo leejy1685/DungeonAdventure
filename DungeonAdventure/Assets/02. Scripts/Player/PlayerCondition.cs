@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//플레이어의 컨디션을 관리하는 메서드
+//플레이어의 컨디션을 관리하는 클래스
 public class PlayerCondition : MonoBehaviour
 {
     private PlayerController controller;
@@ -20,13 +20,8 @@ public class PlayerCondition : MonoBehaviour
 
     private void Update()
     {
-        //게임 시작 전까지 실행하지 않음
-        if (!GameManager.Instance.isPlaying)
-            return;
-        
-        //체력 소모를 코루틴으로
-        health.Subtract(health.passiveValue*Time.deltaTime);    //자동으로 체력 달기 시간제한
-        stamina.Add(stamina.passiveValue*Time.deltaTime);       //자동으로 스테미나 회복
+        //자동으로 스테미나 회복
+        stamina.Add(stamina.passiveValue*Time.deltaTime); 
 
         //캐릭터 달리기 중일 시 스테미나를 소모
         if (controller.useRun && !UseStamina(controller.runStemina*Time.deltaTime))
@@ -34,18 +29,10 @@ public class PlayerCondition : MonoBehaviour
             //스테미나 전부 소모시 달리기 중지
             controller.useRun =  controller.Running(false);
         }
-
-         
-        //비용이 높은 이유는 알고 있으나 해결 방법을 모르겠음.
-        Die();
     }
     
 
-    public void Die()
-    {
-        if (health.curValue <= 0)
-            GameManager.Instance.GameOver();
-    }
+
     
     public bool UseStamina(float amount)
     {
@@ -55,6 +42,24 @@ public class PlayerCondition : MonoBehaviour
         }
         stamina.Subtract(amount);
         return true;
+    }
+
+    public void StartPlayerCondition()
+    {
+        StartCoroutine(TakeOnDamage());
+    }
+    
+
+    IEnumerator TakeOnDamage()
+    {
+        while (health.curValue > 0)
+        {
+            health.Subtract(health.passiveValue);
+
+            yield return new WaitForSeconds(health.passiveValue);
+        }
+        
+        GameManager.Instance.GameOver();
     }
         
     

@@ -44,14 +44,12 @@ public class Interaction : MonoBehaviour
                     curInteractable = hit.collider.GetComponent<IInteractable>();
                     
                     //텍스트 활성화
-                    curInteractable.SetActivePrompt(true);  //아이템 사용 설명
                     GameManager.Instance.uiManager.SetPromptText(true,curInteractable);    //아이템 설명
                 }
             }
             else//상호작용 가능한 물건이 아닐 때
             {
                 //텍스트 없애기
-                curInteractable?.SetActivePrompt(false);
                 GameManager.Instance.uiManager.SetPromptText(false);
                 
                 //아이템 정보 비우기
@@ -68,7 +66,6 @@ public class Interaction : MonoBehaviour
         if (context.phase == InputActionPhase.Started && curInteractable != null)
         {
             //텍스트 없애기
-            curInteractable.SetActivePrompt(false);
             GameManager.Instance.uiManager.SetPromptText(false);
             
             //상호작용

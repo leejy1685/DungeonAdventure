@@ -2,52 +2,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public interface IInteractable  //상호작용 가능한
 {
-    public void SetActivePrompt(bool onOff);//아이템 오브젝트에서 Text표시
-    public string GetInteractPrompt();// UI에 표시할 정보
+    public string GetItemPrompt();// Item의 대한 설명
+    public string GetInteractPrompt();//상호작용 방법에 대한 설명
     public void OnInteract();// 인터랙션 호출
 }
 
 public class ItemObject : MonoBehaviour,IInteractable
 {
     public ItemData data;
-
-    //오브젝트 UI
-    public Transform canvas;
-    public TextMeshProUGUI text;
-
-    
-    // 이 병신같은 코드 없애고 UI로 기능 할당하기
-    public void SetActivePrompt(bool onOff)
-    {
-        //아이템 사용 시 오류 발생 방지
-        if (canvas == null)
-            return;
-        
-        //아이템 타입에 따른 사용 방법
-        switch (data.type)
-        {
-            case ItemType.Consumable:
-                text.text = "'E'를 눌러서 사용";
-                break;
-            case ItemType.Equipable:
-                text.text = "'E'를 눌러서 장착";
-                break;
-        }
-        
-        //유저를 보기(유저 카메라)
-        canvas.LookAt(CharacterManager.Instance.Player.Controller.cameraContainer);
-        canvas.gameObject.SetActive(onOff);
-    }
     
     //아이템 설명
-    public string GetInteractPrompt()
+    public string GetItemPrompt()
     {
         string str = $"{data.displayName}\n{data.description}";
         return str;
+    }
+    
+    //상호작용 방법에 대한 설명
+    public string GetInteractPrompt()
+    {
+        switch (data.type)
+        {
+            case ItemType.Consumable:
+                return "'E'키를 눌러 사용";
+            case ItemType.Equipable:
+                return "'E'키를 눌러 장착";
+        }
+
+        return "";
     }
 
     //상호작용 효과
@@ -81,7 +68,4 @@ public class ItemObject : MonoBehaviour,IInteractable
         //아이템 오브젝트 파괴
         Destroy(gameObject);
     }
-
-
-    
 }
