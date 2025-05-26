@@ -104,7 +104,9 @@ E키로 아이템과 상호작용하여 아이템을 사용 또는 장착 할 �
 ### 리소스
 - 내일배움캠프 제공
 - Kenney 무료 에셋
-- Unity 무료 에셋
+  - https://kenney.nl/assets/input-prompts
+- Unity 무료 에셋  License agreement : Standard Unity Asset Store EULA
+  - https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/free-low-poly-human-rpg-character-219979
    
 
 ### 플레이 해보기
